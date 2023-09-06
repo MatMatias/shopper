@@ -12,7 +12,7 @@ services:
     volumes:
       - ./backend:/webservice
     ports:
-      - 3000:3000
+      - $PORT:$PORT
     command: sh -c "npm run dev"
     depends_on:
       - database
@@ -22,11 +22,14 @@ services:
     restart: always
     env_file: ./backend/.env
     environment:
-      - MYSQL_ROOT_PASSWORD=$DB_DEV_PASSWORD
       - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_PASSWORD=$DB_DEV_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$DB_DEV_PASSWORD
     ports:
       - $DB_LOCAL_PORT:$DB_LOCAL_PORT
-    build:
-      context: ./backend/src/database
     volumes:
-      - ./backend/src/database/:/docker-entrypoint-initdb.d/
+      - ./backend/database_scripts/:/scripts/
+      - ./backend/database_scripts/populate-database.sql:/docker-entrypoint-initdb.d/populate-database.sql
+      - db-volume:/var/lib/mysql
+volumes:
+  db-volume:

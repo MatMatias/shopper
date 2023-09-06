@@ -1,6 +1,6 @@
 # Shopper Fullstack Challenge
 
-## Atualização de preços
+## Política de Preços
 
 1. arquivo CSV: product_code, new_price
 2. preço de venda > preço de custo
@@ -48,12 +48,12 @@ $ docker build -t webservice backend/Dockerfile
 $ docker compose up --detach
 ```
 
-3. populate the database:
+### If for some reason the database is not filled up when starting with docker compose up, run:
 
 ```bash
 $ source ./backend/.env && export $(grep DB_DEV_PASSWORD ./backend/.env | xargs)
 $ source ./backend/.env && export $(grep DB_NAME ./backend/.env | xargs)
-$ docker exec database /bin/sh -c 'mysql -u root --password=$DB_DEV_PASSWORD -D $DB_NAME </docker-entrypoint-initdb.d/populate-database.sql'
+$ docker exec database /bin/sh -c 'mysql -u root --password=$DB_DEV_PASSWORD -D $DB_NAME </scripts/populate-database.sql'
 ```
 
 ### If you want to clear the database, run:
@@ -61,5 +61,25 @@ $ docker exec database /bin/sh -c 'mysql -u root --password=$DB_DEV_PASSWORD -D 
 ```bash
 $ source ./backend/.env && export $(grep DB_DEV_PASSWORD ./backend/.env | xargs)
 $ source ./backend/.env && export $(grep DB_NAME ./backend/.env | xargs)
-$ docker exec database /bin/sh -c 'mysql -u root --password=$DB_DEV_PASSWORD -D $DB_NAME </docker-entrypoint-initdb.d/clear-database.sql'
+$ docker exec database /bin/sh -c 'mysql -u root --password=$DB_DEV_PASSWORD -D $DB_NAME </scripts/clear-database.sql'
+```
+
+### Stoping the project:
+
+```bash
+$ docker compose down
+```
+
+## Interacting with the application:
+
+- To access the database container:
+
+```bash
+$ docker exec -it database /bin/sh
+```
+
+- To access the webservice container:
+
+```bash
+$ docker exec -it webservice /bin/sh
 ```

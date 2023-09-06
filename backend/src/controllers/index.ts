@@ -1,3 +1,3 @@
-import { ValidateController } from "./validate/ValidateController";
+import { ValidateController } from "./validate/validate.controller";
 
 export { ValidateController };

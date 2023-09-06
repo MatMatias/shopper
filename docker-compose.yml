@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  webservice:
+    container_name: webservice
+    image: webservice:latest
+    restart: always
+    working_dir: /webservice
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/webservice
+    ports:
+      - 3000:3000
+    command: sh -c "npm run dev"
+    depends_on:
+      - database
+  database:
+    container_name: database
+    image: mysql:8.0
+    restart: always
+    env_file: ./backend/.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_DEV_PASSWORD
+      - MYSQL_DATABASE=$DB_NAME
+    ports:
+      - $DB_LOCAL_PORT:$DB_LOCAL_PORT
+    build:
+      context: ./backend/src/database
+    volumes:
+      - ./backend/src/database/:/docker-entrypoint-initdb.d/

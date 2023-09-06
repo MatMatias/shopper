@@ -1,7 +1,7 @@
 require("dotenv").config();
 import "express-async-errors";
 import type { Express, Router } from "express";
-import { errorMiddleware } from "@middlewares/errorMiddleware";
+// import { errorMiddleware } from "@middlewares/index";
 import { router } from "./routes";
 import express from "express";
 
@@ -19,13 +19,17 @@ export class ExpressServer {
           ? `http://${process.env.DEV_URL}:${process.env.PORT}`
           : `https://${process.env.PROD_URL}`
       );
-      res.header("Access-Control-Allow-Methods", ["GET"]);
+      res.header("Access-Control-Allow-Methods", ["POST"]);
       next();
     });
     this.instance.use((_, __, next) => {
-      errorMiddleware;
+      express.json();
       next();
     });
+    // this.instance.use((_, __, next) => {
+    //   errorMiddleware;
+    //   next();
+    // });
     this.instance.use("/api", this.route);
   }
 

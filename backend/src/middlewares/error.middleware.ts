@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { ApiError } from "@helpers/ApiErrors";
+import { ApiError } from "@helpers/api-errors.helper";
 
 export const errorMiddleware = (
   error: Error & Partial<ApiError>,

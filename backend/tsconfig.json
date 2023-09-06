@@ -22,6 +22,8 @@
     "paths": {
       "@constants/*": ["src/constants/*"],
       "@controllers/*": ["src/controllers/*"],
+      "@database/*": ["src/database/*"],
+      "@errors/*": ["src/errors/*"],
       "@services/*": ["src/services/*"],
       "@models/*": ["src/models/*"],
       "@middlewares/*": ["src/middlewares/*"],

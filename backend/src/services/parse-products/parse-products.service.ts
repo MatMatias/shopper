@@ -1,15 +1,16 @@
 import type { ProductsRepository } from "@repositories/products.repository";
-import type { CSVRow, Product, ProductWithErrors } from "@models/index";
+import type { CSVRow, ProductWithErrors } from "@models/index";
 
 import { parseCSV } from "@helpers/parse-csv.helper";
-import { POLICY_PRICE_READJUSTMENT } from "@src/policies";
+import {
+  getIsPriceValid,
+  getIsReadjustmentValid,
+} from "@services/validate-data";
 
-export class InsertErrorsInProductsService {
+export class ParseProductsService {
   constructor(private productsRepository: ProductsRepository) {}
 
-  async insertErrorsInProduct(
-    csv: Express.Multer.File
-  ): Promise<ProductWithErrors[]> {
+  async parseProducts(csv: Express.Multer.File): Promise<ProductWithErrors[]> {
     const csvRows: CSVRow[] = await parseCSV(csv);
 
     const productsWithErrors: ProductWithErrors[] = [];
@@ -46,8 +47,8 @@ export class InsertErrorsInProductsService {
         errors: [],
       };
 
-      const isPriceValid = this.getIsPriceValid(product, csvRow.new_price);
-      const isReadjusmentValid = this.getIsReadjustmentValid(
+      const isPriceValid = getIsPriceValid(product, csvRow.new_price);
+      const isReadjusmentValid = getIsReadjustmentValid(
         product,
         csvRow.new_price
       );
@@ -68,32 +69,5 @@ export class InsertErrorsInProductsService {
     }
 
     return productsWithErrors;
-  }
-
-  private getIsPriceValid(product: Product, price: number) {
-    const costPrice = parseFloat(product.cost_price.toFixed(1));
-    const newPrice = parseFloat(price.toFixed(1));
-
-    return newPrice > costPrice ? true : false;
-  }
-
-  private getIsReadjustmentValid(product: Product, price: number) {
-    const positiveReadjustedPrice = parseFloat(
-      ((1 + POLICY_PRICE_READJUSTMENT) * product.sales_price).toFixed(1)
-    );
-    const negativeReadjustedPrice = parseFloat(
-      ((1 - POLICY_PRICE_READJUSTMENT) * product.sales_price).toFixed(1)
-    );
-
-    const newPrice = parseFloat(price.toFixed(1));
-
-    if (
-      newPrice === positiveReadjustedPrice ||
-      newPrice === negativeReadjustedPrice
-    ) {
-      return true;
-    }
-
-    return false;
   }
 }

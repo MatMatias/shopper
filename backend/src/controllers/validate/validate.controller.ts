@@ -1,9 +1,6 @@
 import type { Request, Response } from "express";
 
-import {
-  ValidateCSVService,
-  InsertErrorsInProductsService,
-} from "@services/index";
+import { ValidateCSVService, ParseProductsService } from "@services/index";
 import { ProductsRepository } from "@repositories/index";
 import {
   NoFileError,
@@ -27,15 +24,14 @@ export class ValidateController {
     }
 
     const productsRepository = new ProductsRepository();
-    const validateCSVService = new ValidateCSVService(productsRepository);
-    const insertErrorsInProductsService = new InsertErrorsInProductsService(
-      productsRepository
-    );
+    const validateCSVService = new ValidateCSVService();
+    const parseProductsService = new ParseProductsService(productsRepository);
 
     try {
       await validateCSVService.validateCSV(req.file);
-      const productsWithErrors =
-        await insertErrorsInProductsService.insertErrorsInProduct(req.file);
+      const productsWithErrors = await parseProductsService.parseProducts(
+        req.file
+      );
 
       res.status(200).json({ message: "success", data: productsWithErrors });
     } catch (error: unknown) {

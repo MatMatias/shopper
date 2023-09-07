@@ -22,10 +22,10 @@ export class ExpressServer {
       res.header("Access-Control-Allow-Methods", ["POST"]);
       next();
     });
-    this.instance.use((_, __, next) => {
-      express.json();
-      next();
-    });
+    // this.instance.use((_, __, next) => {
+    //   express.json();
+    //   next();
+    // });
     // this.instance.use((_, __, next) => {
     //   errorMiddleware;
     //   next();

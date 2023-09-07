@@ -1,4 +1,5 @@
 import { getDatabaseInstance } from "@database/index";
+import { DatabaseError } from "@errors/index";
 import { Product } from "@models/index";
 
 export class ProductsRepository {
@@ -27,8 +28,28 @@ export class ProductsRepository {
       }
     } catch (error) {
       console.error("Error ocorrued in getAllProducts function:", error);
+      throw new DatabaseError("getAllProducts");
     } finally {
       return product;
+    }
+  }
+
+  async updateProductPriceByCode(
+    newPrice: number,
+    productCode: number
+  ): Promise<void> {
+    try {
+      const dbInstance = await getDatabaseInstance();
+
+      await dbInstance.query(
+        `UPDATE products SET sales_price=${newPrice} WHERE code=${productCode}`
+      );
+    } catch (error) {
+      console.error(
+        "Error ocorrued in updateProductPriceByCode function:",
+        error
+      );
+      throw new DatabaseError("updateProductPriceByCode");
     }
   }
 }

@@ -1,0 +1,6 @@
+.container {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  height: 60vh;
+}

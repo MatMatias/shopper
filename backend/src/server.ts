@@ -1,5 +1,9 @@
-require("dotenv").config();
-import "express-async-errors";
+import path from "path";
+const parentDir = path.resolve(__dirname, "..");
+const envFilePath = path.join(parentDir, ".env");
+require("dotenv").config({ path: envFilePath });
+
+// import "express-async-errors";
 import type { Express, Router } from "express";
 // import { errorMiddleware } from "@middlewares/index";
 import { router } from "./routes";
@@ -16,7 +20,7 @@ export class ExpressServer {
       res.header(
         "Access-Control-Allow-Origin",
         deploymentMode === "dev"
-          ? `http://${process.env.DEV_URL}:${process.env.PORT}`
+          ? `http://${process.env.DEV_URL}:${process.env.VITE_LOCAL_APP_PORT}`
           : `https://${process.env.PROD_URL}`
       );
       res.header("Access-Control-Allow-Methods", ["POST"]);

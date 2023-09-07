@@ -1,0 +1,27 @@
+.main {
+  text-align: center;
+}
+
+.title {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.paragraph {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.infoContainer {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#rootPrimaryButton {
+  margin-bottom: 3rem;
+}

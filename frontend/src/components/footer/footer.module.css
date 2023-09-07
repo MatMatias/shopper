@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+
+  text-decoration: underline;
+}
+
+.link {
+  cursor: pointer;
+}

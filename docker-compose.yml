@@ -1,6 +1,22 @@
 version: "3.8"
 
 services:
+  webapp:
+    container_name: webapp
+    image: webapp:latest
+    restart: always
+    working_dir: /webapp
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/webapp
+      - ./.env:/webapp/.env
+    ports:
+      - $VITE_LOCAL_APP_PORT:$VITE_LOCAL_APP_PORT
+    command: sh -c "npm run dev --host"
+    depends_on:
+      - webservice
   webservice:
     container_name: webservice
     image: webservice:latest
@@ -11,6 +27,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend:/webservice
+      - ./.env:/webservice/.env
     ports:
       - $PORT:$PORT
     command: sh -c "npm run dev"
@@ -20,7 +37,6 @@ services:
     container_name: database
     image: mysql:8.0
     restart: always
-    env_file: ./backend/.env
     environment:
       - MYSQL_DATABASE=$DB_NAME
       - MYSQL_PASSWORD=$DB_DEV_PASSWORD

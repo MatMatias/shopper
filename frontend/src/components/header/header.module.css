@@ -1,0 +1,54 @@
+.container {
+  background-color: black;
+}
+
+.nav {
+  color: white;
+  height: 55px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding-inline: 1rem;
+  place-items: center;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.link {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+
+  padding-inline: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 8px;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.selectedLink {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+
+  padding-inline: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 8px;
+
+  background-color: rgba(255, 255, 255, 0.2);
+}

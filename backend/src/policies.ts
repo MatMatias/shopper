@@ -1,0 +1,1 @@
+export const POLICY_PRICE_READJUSTMENT = 0.1;

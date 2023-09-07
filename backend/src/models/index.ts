@@ -1,3 +1,3 @@
-import { Product } from "./interfaces";
+import { Product, CSVRow, ProductWithErrors } from "./interfaces";
 
-export { Product };
+export { Product, CSVRow, ProductWithErrors };

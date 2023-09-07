@@ -1,10 +1,10 @@
 # Shopper Fullstack Challenge
 
-## Política de Preços
+## Política de atualização de preços
 
 1. arquivo CSV: product_code, new_price
-2. preço de venda > preço de custo
-3. reajustes tem que ser de 10%
+2. preço de venda > preço de custo V
+3. reajustes tem que ser de 10% V
 4. alguns produtos são vendidos em pacotes
    4.1) reajuste de pacote deve reajustar o preço dos produtos para dar match no novo preço
    4.2) reajuste no produto deve causar reajuste no preço do pacote

@@ -25,10 +25,24 @@
 .dropzoneSection {
   width: 100%;
   display: flex;
+  margin-bottom: 5rem;
+
   place-items: center;
   flex-direction: column;
+  gap: 1rem;
 }
 
-#rootPrimaryButton {
-  margin-bottom: 3rem;
+.tableSection {
+  width: 100%;
+  display: flex;
+  margin-bottom: 5rem;
+
+  place-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
 }

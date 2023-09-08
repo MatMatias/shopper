@@ -1,0 +1,18 @@
+.bigHeadCell {
+  min-width: 290px;
+}
+
+.bigBodyCell {
+  min-width: 290px;
+  text-align: left;
+}
+
+.tableContainer {
+  overflow-x: scroll;
+  display: flex;
+  width: 100%;
+}
+
+.cell {
+  text-align: left;
+}

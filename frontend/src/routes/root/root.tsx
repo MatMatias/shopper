@@ -61,7 +61,7 @@ export const Root = () => {
           </div>
           <section className={styles.dropzoneSection}>
             <Dropzone file={file} setFile={setFile} />
-            <div>
+            <div className={styles.buttonGroup}>
               <button
                 disabled={!file}
                 onClick={async () => {
@@ -80,44 +80,67 @@ export const Root = () => {
                     );
                   }
                 }}
+                className={!file ? "primary-button-disabled" : "primary-button"}
               >
+                <span className="primary-button-disabled-tooltip">
+                  Upload a file to validate
+                </span>
                 Validate
               </button>
-              <button onClick={() => setFile(undefined)}>Clear</button>
+              <button
+                className={"secondary-button-outline"}
+                onClick={() => setFile(undefined)}
+              >
+                Clear
+              </button>
             </div>
           </section>
         </Fragment>
       ) : (
         <Fragment>
           <h2>Products from CSV:</h2>
-          <ProductsTable parsedProducts={parsedProducts} />
-          <button
-            disabled={areThereAnyErrorsInProducts}
-            onClick={async () => {
-              const updatePricePromises = parsedProducts.map(async (product) =>
-                updatePrice(product.code, product.new_price)
-              );
-              try {
-                await Promise.all(updatePricePromises);
-                alert("Prices updated successfully");
-                cleanUp();
-              } catch (error) {
-                console.error(error);
-                alert(
-                  "One or more product price could not be updated. Check console for details"
-                );
-              }
-            }}
-          >
-            Update prices
-          </button>
-          <button
-            onClick={() => {
-              cleanUp();
-            }}
-          >
-            Upload new CSV
-          </button>
+          <section className={styles.tableSection}>
+            <ProductsTable parsedProducts={parsedProducts} />
+            <div className={styles.buttonGroup}>
+              <button
+                className={
+                  areThereAnyErrorsInProducts
+                    ? "primary-button-disabled"
+                    : "primary-button"
+                }
+                disabled={areThereAnyErrorsInProducts}
+                onClick={async () => {
+                  const updatePricePromises = parsedProducts.map(
+                    async (product) =>
+                      updatePrice(product.code, product.new_price)
+                  );
+                  try {
+                    await Promise.all(updatePricePromises);
+                    alert("Prices updated successfully");
+                    cleanUp();
+                  } catch (error) {
+                    console.error(error);
+                    alert(
+                      "One or more product price could not be updated. Check console for details"
+                    );
+                  }
+                }}
+              >
+                Update prices
+                <span className="primary-button-disabled-tooltip">
+                  There are errors on one or more products
+                </span>
+              </button>
+              <button
+                className="secondary-button-outline"
+                onClick={() => {
+                  cleanUp();
+                }}
+              >
+                Upload new CSV
+              </button>
+            </div>
+          </section>
         </Fragment>
       )}
       <Footer />

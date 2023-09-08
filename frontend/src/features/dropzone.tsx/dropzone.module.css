@@ -1,7 +1,11 @@
 .dropzoneContainer {
-  display: inline-block;
-  border-style: dashed;
-  text-align: center;
-  width: 95%;
+  display: flex;
+  place-items: center;
+  place-content: center;
+
   cursor: pointer;
+
+  border-style: dashed;
+  width: 95%;
+  height: 150px;
 }

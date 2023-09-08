@@ -10,7 +10,7 @@ export class ProductsRepository {
       const dbInstance = await getDatabaseInstance();
 
       const [rows, _] = await dbInstance.query(
-        `SELECT * FROM products WHERE code=${code};`
+        `SELECT code, CONVERT(CAST(CONVERT(name USING LATIN1) AS BINARY) USING UTF8) as name, cost_price, sales_price FROM products WHERE code=${code};`
       );
       await dbInstance.end();
 

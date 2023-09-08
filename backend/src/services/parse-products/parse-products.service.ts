@@ -27,11 +27,11 @@ export class ParseProductsService {
       if (!product) {
         productWithErrors = {
           code: csvRow.product_code,
-          name: "Produto Não Encontrado",
+          name: "PRODUCT NOT FOUND",
           cost_price: 0,
           sales_price: 0,
           new_price: 0,
-          errors: ["Produto não registrado no banco de dados"],
+          errors: ["Product not found in the database"],
         };
 
         productsWithErrors.push(productWithErrors);
@@ -54,15 +54,25 @@ export class ParseProductsService {
       );
 
       if (!isPriceValid) {
-        productWithErrors.errors.push(
-          `Preço invalido: novo preço R$${productWithErrors.new_price} menor que o preço de custo R$${productWithErrors.cost_price}`
-        );
+        const errorMessage =
+          `Invalid Price: new price R$${productWithErrors.new_price.toFixed(
+            2
+          )} must be bigger than R$${productWithErrors.cost_price.toFixed(
+            2
+          )}`.replace(new RegExp("\\.", "g"), ",");
+        productWithErrors.errors.push(errorMessage);
       }
 
       if (!isReadjusmentValid) {
-        productWithErrors.errors.push(
-          "Reajuste invalido: O reajuste deve ser de exatos 10%"
-        );
+        const errorMessage =
+          `Invalid Readjustment: new price must be of 10% (R$ ${(
+            productWithErrors.sales_price * 1.1
+          ).toFixed(2)} or R$ ${(productWithErrors.sales_price * 0.9).toFixed(
+            2
+          )}) of the current price R$ ${productWithErrors.sales_price.toFixed(
+            2
+          )}`.replace(new RegExp("\\.", "g"), ",");
+        productWithErrors.errors.push(errorMessage);
       }
 
       productsWithErrors.push(productWithErrors);

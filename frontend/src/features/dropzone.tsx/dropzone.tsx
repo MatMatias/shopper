@@ -21,11 +21,7 @@ export const Dropzone = ({ setFile, file }: Props) => {
   return (
     <div {...getRootProps()} className={styles.dropzoneContainer}>
       <input {...getInputProps()} />
-      {file ? (
-        <h3>{file.name}</h3>
-      ) : (
-        <h3>Drag, click or tap to upload the CSV</h3>
-      )}
+      {file ? <h2>{file.name}</h2> : <h3>Drag or click to upload CSV</h3>}
     </div>
   );
 };

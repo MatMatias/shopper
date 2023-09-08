@@ -1,1 +1,3 @@
-./*.ts
+**/Dockerfile
+**/node_modules
+**/.env.example

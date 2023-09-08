@@ -1,5 +1,5 @@
-.env
-backend/test_files
+**/.env
+backend/test_files/*
 **/coverage
 **/dist/
 **/node_modules/

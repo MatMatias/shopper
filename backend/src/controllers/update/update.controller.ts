@@ -26,11 +26,9 @@ export class UpdateController {
         return;
       }
 
-      res
-        .status(400)
-        .json({
-          error: `Product of code ${code} is not compliant to prices policy`,
-        });
+      res.status(400).json({
+        error: `Product of code ${code} is not compliant to prices policy`,
+      });
     } catch (error: unknown) {
       if (
         error instanceof GenericClientError ||

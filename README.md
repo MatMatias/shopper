@@ -2,7 +2,7 @@
 
 ## About:
 
-This project is the implementation of the Full Stack Challenge, from [Shopper](https://landing.shopper.com.br/)
+This project is the implementation of the Full Stack Challenge, from [Shopper](https://landing.shopper.com.br/).
 
 ## Technologies used:
 
@@ -30,7 +30,7 @@ DISCLAIMER: ALL of the terminal commands contained in this README.md assumes tha
 - First, setup the environment variables. To do it, run the following command in your terminal:
 
   ```bash
-  $ cp .env.example ./.env
+  cp .env.example ./.env
   ```
 
   Then, you can change the .env variables if you want it. But it is not needed to run the project.
@@ -53,51 +53,51 @@ To run the project with docker, you'll need to have it [installed](https://docs.
 
 - To start the project, run the following command in your terminal:
   ```bash
-  $ docker compose up -d
+  docker compose up -d
   ```
   - If you need to see the webapp logs, run:
     ```bash
-    $ docker logs -f webapp
+    docker logs -f webapp
     ```
   - If you need to see the webservice logs, run:
     ```bash
-    $ docker logs -f webservice
+    docker logs -f webservice
     ```
   - If you need to see the database logs, run:
     ```bash
-    $ docker logs -f database
+    docker logs -f database
     ```
   - If you need to interact with the database, run:
     ```bash
-    $ docker exec -it database /bin/sh
-    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    $ source ./.env && export $(grep DB_NAME /.env | xargs)
-    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME
-    $ exit
+    docker exec -it database /bin/sh
+    source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    source ./.env && export $(grep DB_NAME /.env | xargs)
+    mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME
+    exit
     ```
   - If you want to clear the database, run the following commands:
     ```bash
-    $ docker exec -it database /bin/sh
-    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    $ source ./.env && export $(grep DB_NAME /.env | xargs)
-    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME </database_scripts/clear-database.sql
-    $ exit
+    docker exec -it database /bin/sh
+    source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    source ./.env && export $(grep DB_NAME /.env | xargs)
+    mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME </database_scripts/clear-database.sql
+    exit
     ```
   - If you want to repopulate the database, run the following commands:
     ```bash
-    $ docker exec -it database /bin/sh
-    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    $ source ./.env && export $(grep DB_NAME /.env | xargs)
-    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME <./database_scripts/populate-database.sql
-    $ exit
+    docker exec -it database /bin/sh
+    source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    source ./.env && export $(grep DB_NAME /.env | xargs)
+    mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME <./database_scripts/populate-database.sql
+    exit
     ```
   - To stop the project, run:
-  ```bash
-  $ docker compose down
-  ```
+    ```bash
+    docker compose down
+    ```
 
 ### Without Docker:
 
@@ -107,13 +107,13 @@ To run the project with docker, you'll need to have it [installed](https://docs.
 - Install the webservice dependencies and run it:
   Run the following command in your terminal:
   ```bash
-  $ cd backend
-  $ npm install && npm run dev
+  cd backend
+  npm install && npm run dev
   ```
 - Install the webapp dependencies and run it:
   ```bash
-  $ cd frontend
-  $ npm install && npm run dev
+  cd frontend
+  npm install && npm run dev
   ```
 
 ## Accessing the services:

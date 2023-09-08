@@ -70,29 +70,29 @@ To run the project with docker, you'll need to have it [installed](https://docs.
   - If you need to interact with the database, run:
     ```bash
     $ docker exec -it database /bin/sh
-    # source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    # source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    # source ./.env && export $(grep DB_NAME /.env | xargs)
-    # mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME
-    # exit
+    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    $ source ./.env && export $(grep DB_NAME /.env | xargs)
+    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME
+    $ exit
     ```
   - If you want to clear the database, run the following commands:
     ```bash
     $ docker exec -it database /bin/sh
-    # source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    # source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    # source ./.env && export $(grep DB_NAME /.env | xargs)
-    # mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME </database_scripts/clear-database.sql
-    # exit
+    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    $ source ./.env && export $(grep DB_NAME /.env | xargs)
+    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME </database_scripts/clear-database.sql
+    $ exit
     ```
   - If you want to repopulate the database, run the following commands:
     ```bash
     $ docker exec -it database /bin/sh
-    # source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
-    # source ./.env && export $(grep DB_DEV_USER /.env | xargs)
-    # source ./.env && export $(grep DB_NAME /.env | xargs)
-    # mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME <./database_scripts/populate-database.sql
-    # exit
+    $ source ./.env && export $(grep DB_DEV_PASSWORD /.env | xargs)
+    $ source ./.env && export $(grep DB_DEV_USER /.env | xargs)
+    $ source ./.env && export $(grep DB_NAME /.env | xargs)
+    $ mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME <./database_scripts/populate-database.sql
+    $ exit
     ```
   - To stop the project, run:
   ```bash

@@ -1,3 +1,3 @@
-import { validateCSV } from "./validate-csv.service";
+import { validateCSVAndGetProductsToBeUpdated } from "./validate-csv.service";
 
-export { validateCSV };
+export { validateCSVAndGetProductsToBeUpdated };

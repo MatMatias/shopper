@@ -49,7 +49,8 @@ To run the project with docker, you'll need to have it [installed](https://docs.
   - xargs
   - source
   - export
-    These programs are builtin in most of unix like Operating Systems.
+
+  These programs are builtin in most of unix like Operating Systems.
 
 - To start the project, run the following command in your terminal:
   ```bash

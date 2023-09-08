@@ -14,7 +14,7 @@ services:
       - ./.env:/webapp/.env
     ports:
       - $VITE_LOCAL_APP_PORT:$VITE_LOCAL_APP_PORT
-    command: sh -c "npm run dev --host"
+    command: sh -c "npm install && npm run dev --host"
     depends_on:
       - webservice
   webservice:
@@ -30,7 +30,7 @@ services:
       - ./.env:/webservice/.env
     ports:
       - $PORT:$PORT
-    command: sh -c "npm run dev"
+    command: sh -c "npm install && npm run dev"
     depends_on:
       - database
   database:
@@ -44,8 +44,9 @@ services:
     ports:
       - $DB_LOCAL_PORT:$DB_LOCAL_PORT
     volumes:
-      - ./backend/database_scripts/:/scripts/
+      - ./backend/database_scripts/:/database_scripts/
       - ./backend/database_scripts/populate-database.sql:/docker-entrypoint-initdb.d/populate-database.sql
+      - ./.env:/.env
       - db-volume:/var/lib/mysql
 volumes:
   db-volume:

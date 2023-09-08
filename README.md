@@ -36,7 +36,7 @@ DISCLAIMER: ALL of the terminal commands contained in this README.md assumes tha
   Then, you can change the .env variables if you want it. But it is not needed to run the project.
 
 - There are two ways to run this project:
-  1. With [Docker](https://www.docker.com/)
+  1. With [Docker](https://www.docker.com/) (RECOMMENDED)
   2. Without [Docker](https://www.docker.com/)
 
 ### With Docker:
@@ -49,8 +49,9 @@ To run the project with docker, you'll need to have it [installed](https://docs.
   - xargs
   - source
   - export
+  - grep
 
-  These programs are builtin in most of unix like Operating Systems.
+  These programs are builtin in most unix like Operating Systems.
 
 - To start the project, run the following command in your terminal:
   ```bash
@@ -75,7 +76,6 @@ To run the project with docker, you'll need to have it [installed](https://docs.
     source ./.env && export $(grep DB_DEV_USER /.env | xargs)
     source ./.env && export $(grep DB_NAME /.env | xargs)
     mysql -u $DB_DEV_USER --password=$DB_DEV_PASSWORD -D $DB_NAME
-    exit
     ```
   - If you want to clear the database, run the following commands:
     ```bash
@@ -104,7 +104,8 @@ To run the project with docker, you'll need to have it [installed](https://docs.
 
 - To run without docker, you'll need to have [MySQL](https://www.mysql.com/) version 8 installed and running in your local port 3306 (or your custom database port, if you changed the DB_LOCAL_PORT .env variable)
 - You will also need [NodeJS](https://nodejs.org/) v^18.17.1
-
+- Create a database with the same name as the .env variable DB_NAME in your local MySQL database.
+- Run the backend/database_scripts/populate-database.sql in your local MySQL database.
 - Install the webservice dependencies and run it:
   Run the following command in your terminal:
   ```bash
@@ -121,7 +122,7 @@ To run the project with docker, you'll need to have it [installed](https://docs.
 
 ### Webapp
 
-The webapp will be availabe in http://localhost:4000, or in your custom port, in case you changed the .env VITE_LOCAL_PORT variable.
+The webapp will be accessible at http://localhost:4000 by default. If you have customized the port in your .env file using the VITE_LOCAL_PORT variable, it will be available at your specified port instead. Please note that when starting the application with Docker Compose, the database may take up to two minutes to initialize. Therefore, it is advisable to wait for this initialization period to complete before launching the web application. This waiting period is only required during the initial startup.
 
 ### Webservice
 

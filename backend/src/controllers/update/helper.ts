@@ -17,9 +17,16 @@ export async function getIsPriceCompliantToPolicies(
     throw new ProductNotFoundError();
   }
 
-  const isPriceValid = getIsPriceValid(productToBeUpdated, new_price);
+  if (productToBeUpdated.code >= 1000) {
+    return true;
+  }
+
+  const isPriceValid = getIsPriceValid(
+    productToBeUpdated.cost_price,
+    new_price
+  );
   const isReadjustmentValid = getIsReadjustmentValid(
-    productToBeUpdated,
+    productToBeUpdated.sales_price,
     new_price
   );
 

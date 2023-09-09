@@ -18,3 +18,21 @@ export interface ProductWithErrors {
   new_price: number;
   errors: string[];
 }
+
+export interface Pack {
+  id: number;
+  pack_id: number;
+  product_id: number;
+  qty: number;
+}
+
+export interface AggregatedPack {
+  id: number;
+  pack_id: number;
+  products_quantities: ProductQuantity[];
+}
+
+export interface ProductQuantity {
+  product_id: number;
+  qty: number;
+}

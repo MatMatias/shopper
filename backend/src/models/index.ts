@@ -1,3 +1,17 @@
-import { Product, CSVRow, ProductWithErrors } from "./interfaces";
+import {
+  AggregatedPack,
+  Product,
+  CSVRow,
+  Pack,
+  ProductQuantity,
+  ProductWithErrors,
+} from "./interfaces";
 
-export { Product, CSVRow, ProductWithErrors };
+export {
+  AggregatedPack,
+  Product,
+  CSVRow,
+  Pack,
+  ProductQuantity,
+  ProductWithErrors,
+};

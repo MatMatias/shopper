@@ -1,8 +1,9 @@
 import type { Request, Response } from "express";
+import type { Pack } from "@models/interfaces";
 
 import { GenericClientError, GenericServerError } from "@errors/index";
 import { getIsPriceCompliantToPolicies } from "./helper";
-import { ProductsRepository } from "@repositories/index";
+import { PacksRepository, ProductsRepository } from "@repositories/index";
 
 export class UpdateController {
   async put(
@@ -12,6 +13,10 @@ export class UpdateController {
     const { new_price } = req.body;
     const { code } = req.params;
     const productsRepository = new ProductsRepository();
+    const packsRepository = new PacksRepository();
+    const pack: Pack | undefined = await packsRepository.getPackByProductCode(
+      code
+    );
 
     try {
       const isNewPriceCompliantToPolicies = await getIsPriceCompliantToPolicies(
@@ -20,6 +25,14 @@ export class UpdateController {
         productsRepository
       );
       if (isNewPriceCompliantToPolicies) {
+        if (pack) {
+          const newPackPrice = new_price * pack.qty;
+          await productsRepository.updateProductPriceByCode(
+            newPackPrice,
+            pack.pack_id
+          );
+        }
+
         await productsRepository.updateProductPriceByCode(new_price, code);
         res.status(200).json({ message: "success" });
 

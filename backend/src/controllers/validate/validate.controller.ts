@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
 import { ValidateCSVService, ParseProductsService } from "@services/index";
-import { ProductsRepository } from "@repositories/index";
+import { ProductsRepository, PacksRepository } from "@repositories/index";
 import {
   NoFileError,
   FieldnameError,
@@ -24,8 +24,12 @@ export class ValidateController {
     }
 
     const productsRepository = new ProductsRepository();
+    const packsRepository = new PacksRepository();
     const validateCSVService = new ValidateCSVService();
-    const parseProductsService = new ParseProductsService(productsRepository);
+    const parseProductsService = new ParseProductsService(
+      productsRepository,
+      packsRepository
+    );
 
     try {
       await validateCSVService.validateCSV(req.file);

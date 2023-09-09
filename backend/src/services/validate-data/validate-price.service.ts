@@ -1,8 +1,6 @@
-import { Product } from "@models/index";
+export function getIsPriceValid(costPrice: number, newPrice: number) {
+  const _costPrice = parseFloat(costPrice.toFixed(1));
+  const _newPrice = parseFloat(newPrice.toFixed(1));
 
-export function getIsPriceValid(product: Product, price: number) {
-  const costPrice = parseFloat(product.cost_price.toFixed(1));
-  const newPrice = parseFloat(price.toFixed(1));
-
-  return newPrice > costPrice ? true : false;
+  return _newPrice > _costPrice ? true : false;
 }

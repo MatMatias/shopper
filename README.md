@@ -23,6 +23,29 @@ This project is the implementation of the Full Stack Challenge, from [Shopper](h
 
 - [MySQL](https://www.mysql.com/) 8.0
 
+## Features:
+
+1. This web application offers users the ability to upload a CSV file containing product information, including product codes and new prices.
+   ![csv_upload](images/csv_upload.png)
+2. Users can validate and update the CSV data if it adheres to specified validation rules and doesn't violate any policy regulations.
+3. After the validation, the application displays a table listing each product that has undergone validation along with any policy rules that may have been violated.
+   ![products_validation](images/products_validation.png)
+
+- To test the application, you can utilize CSV files located in the backend/test_files directory.
+
+Web Service:
+
+- The web service's validation process can be accessed at /api/validate and involves several key steps:
+
+  1. Verify the presence of all required CSV fields;
+  2. Confirm the existence of product codes from the CSV in the database;
+  3. Validate that the prices are numerical and within acceptable ranges (can only change within +/- 10% and must be higher than the product's cost price in the database);
+  4. Check for the presence of product packs in the CSV. If found, ensure that all associated products are also included in the CSV and calculate whether the sum of their new prices matches the pack's new price.
+
+- The web service's database update process can be accessed at /api/update and encompasses the following actions:
+  1. Update prices for products in the CSV that are not associated with any packs, provided they meet all validation criteria;
+  2. If a product in the CSV is associated with a pack, automatically adjust the pack's price to match the new price of its associated products.
+
 ## Run the project:
 
 DISCLAIMER: ALL of the terminal commands contained in this README.md assumes that you are in the ROOT directory of the project.
@@ -131,33 +154,3 @@ The webservice will be available in http://localhost:3000, or in your custom por
 - The endpoints are:
   - /api/validate: validates the csv file and return the list of products that are being targeted to have their prices updated.
   - /api/update/:product_code: update the the product with \[product_code\] with the json: { new_price: [\new_price\] }
-
-<!-- ## Política de atualização de preços
-
-1. arquivo CSV: product_code, new_price
-2. preço de venda > preço de custo V
-3. reajustes tem que ser de 10% V
-4. alguns produtos são vendidos em pacotes
-   4.1) reajuste de pacote deve reajustar o preço dos produtos para dar match no novo preço
-   4.2) reajuste no produto deve causar reajuste no preço do pacote
-
-## Backend:
-
-- endpoint /api/validate POST
-
-  1. Deve aceitar um CSV de precificação V
-  2. Deve verificar se os campos necessários existem V
-  3. Deve verificar se os produtos informados existem V
-  4. Deve verificar se os preços estão preenchdios e são valores numéricos válidos V
-  5. Deve verificar se o arquivo respeita a política de Atualização de preços
-  6. Deve enviar as seguintes infos. dos produtos enviados: Codigo, Nome, Preço Atual, Novo preço
-
-- endpoint /api/update POST
-  1. Deve atualizar o novo preço no banco de dados
-
-## Frontend:
-
-1.  Deve permitir o usuário carregar um CSV
-2.  Após carregar o CSV, tem que aparecer um botão chamado VALIDAR que vai fazer req POST para /api/validate
-3.  Deve exibir as infos. enviadas pela resposta da req. anterior.
-4.  Após a validação, deve aparecer um botão ATUALIZAR que vai fazer req. POST para /api/update e vai fazer a tela voltar para o envio de um novo arquivo -->
